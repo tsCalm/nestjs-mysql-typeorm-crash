@@ -20,5 +20,10 @@ export class UsersService {
     return this.userRepo.save(newUser);
   }
 
-  updateUser(id: number, updateUserDetails: UpdateUserparams) {}
+  updateUser(id: number, updateUserDetails: UpdateUserparams) {
+    return this.userRepo.update({ id }, updateUserDetails);
+  }
+  deleteUser(id: number) {
+    return this.userRepo.delete({ id });
+  }
 }

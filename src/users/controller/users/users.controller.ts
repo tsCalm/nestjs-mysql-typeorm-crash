@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   ParseIntPipe,
@@ -20,7 +21,7 @@ export class UsersController {
    * @returns User
    */
   @Get()
-  getusers() {
+  getUsers() {
     return this.userService.findUsers();
   }
 
@@ -30,10 +31,15 @@ export class UsersController {
   }
 
   @Put(':id')
-  updateUser(
+  async updateUser(
     @Param('id', ParseIntPipe) id: number,
     @Body() updateUserDto: UpdateUserDto,
   ) {
-    return this.userService.updateUser(id, updateUserDto);
+    return await this.userService.updateUser(id, updateUserDto);
+  }
+
+  @Delete(':id')
+  async deleteUser(@Param('id', ParseIntPipe) id: number) {
+    return await this.userService.deleteUser(id);
   }
 }
